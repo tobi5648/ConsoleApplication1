@@ -45,7 +45,7 @@ namespace Server
         {
             Socket clientSocket = (Socket)cSocket;
             byte[] Buffer;
-            int readBytes;
+            int readBytes = 0;
 
             for (;;)
             {
@@ -65,7 +65,9 @@ namespace Server
                 catch (SocketException)
                 {
                     Console.WriteLine("A client disconnected!");
-                    Console.ReadLine();
+                    //_clients.Remove();
+                    //if (clientSocket > _clients.Count)
+                        Console.ReadLine();
                     Environment.Exit(0);
                     //throw;
                 }
