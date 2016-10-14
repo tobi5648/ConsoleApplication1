@@ -15,6 +15,7 @@ namespace Server
     {
         static Socket listenerSocket;
         static List<ClientData> _clients;
+        static int socketExceptions;
 
         static void Main(string[] args) // start server
         {
@@ -64,11 +65,13 @@ namespace Server
                 }
                 catch (SocketException)
                 {
+                    socketExceptions += 1;
                     Console.WriteLine("A client disconnected!");
                     //_clients.Remove();
-                    //if (clientSocket > _clients.Count)
-                        Console.ReadLine();
-                    Environment.Exit(0);
+                    if (socketExceptions == _clients.Count)
+                        Environment.Exit(0);
+                    Console.ReadLine();
+                    
                     //throw;
                 }
             }
